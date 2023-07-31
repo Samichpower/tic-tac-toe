@@ -14,7 +14,12 @@ function appendBoard() {
       let column = index % 3;
       board[row][column] = 'X';
       square.textContent = 'X';
-      computersTurn();
+      for (let i = 0; i < squares.length; i++) {
+        if (!squares[i].textContent) {
+          computersChoice();
+          break;
+        }
+      }
       console.log(board);
     });
   });
@@ -22,11 +27,16 @@ function appendBoard() {
 
 appendBoard();
 
-function computersTurn() {
-  let index = Math.floor(Math.random() * 9);
-  let row = Math.floor(index / 3);
-  let column = index % 3;
-  board[row][column] = 'O';
-  const boardSquare = document.querySelector(`[data-index="${index}"]`);
-  boardSquare.textContent = 'O';
+function computersChoice() {
+  while (true) {
+    let index = Math.floor(Math.random() * 9);
+    let row = Math.floor(index / 3);
+    let column = index % 3;
+    const boardSquare = document.querySelector(`[data-index="${index}"]`);
+    if (!board[row][column]) {
+      board[row][column] = 'O';
+      boardSquare.textContent = 'O';
+      break;
+    }
+  }
 }
