@@ -34,6 +34,7 @@ function appendBoard() {
           break;
         }
       }
+      checkForWinner();
       console.log(board);
     });
   });
@@ -41,6 +42,16 @@ function appendBoard() {
 
 appendBoard();
 
-// function checkForWinner() {
-//   const rowWinner = 
-// }
+function checkForWinner() {
+  const rowWinner = function() {
+    for (let i = 0; i < board.length; i++) {
+      const row = [];
+      for (let j = 0; j < board[i].length; j++) {
+        row.push(board[i][j]);
+      };
+      let result = row.every((item) => item === 'X') || row.every((item) => item === 'O');
+      if (result) console.log(row[0] + ' WON!!!');
+    }
+  }
+  rowWinner();
+}
