@@ -25,6 +25,10 @@ h1 {
 
 .squares {
   border: 2px solid black;
+  font-size: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .squares:hover {
