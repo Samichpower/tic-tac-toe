@@ -21,38 +21,17 @@ h1 {
   grid-template-rows: repeat(3, 150px);
 }
 
+
+/* THE BOARD */
 .squares {
   border: 2px solid black;
 }
 
-#top-left {
-  border-style: none solid solid none;
-}
-
-#top-mid {
-  border-style: none solid solid solid;
-}
-
-#top-right {
-  border-style: none none solid solid;
-}
-
-#mid-left {
-  border-style: solid solid solid none;
-}
-
-#mid-right {
-  border-style: solid none solid solid;
-}
-
-#btm-left {
-  border-style: solid solid none none;
-}
-
-#btm-mid {
-  border-style: solid solid none solid;
-}
-
-#btm-right {
-  border-style: solid none none solid;
-}
+#top-left { border-style: none solid solid none; }
+#top-mid { border-style: none solid solid solid; }
+#top-right { border-style: none none solid solid; }
+#mid-left { border-style: solid solid solid none; }
+#mid-right { border-style: solid none solid solid; }
+#btm-left { border-style: solid solid none none; }
+#btm-mid { border-style: solid solid none solid; }
+#btm-right { border-style: solid none none solid; }
