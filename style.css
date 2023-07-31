@@ -14,6 +14,8 @@ h1 {
   justify-content: center;
 }
 
+
+/* THE BOARD */
 .squares-parent {
   display: grid;
   grid-gap: 0px;
@@ -21,10 +23,12 @@ h1 {
   grid-template-rows: repeat(3, 150px);
 }
 
-
-/* THE BOARD */
 .squares {
   border: 2px solid black;
+}
+
+.squares:hover {
+  background-color: whitesmoke;
 }
 
 #top-left { border-style: none solid solid none; }
