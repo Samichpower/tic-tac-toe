@@ -1,15 +1,58 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+  text-align: center;
+  margin: 10px;
+}
+
+.board-container {
+  display: flex;
+  justify-content: center;
 }
 
 .squares-parent {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 0px;
   grid-template-columns: repeat(3, 150px);
   grid-template-rows: repeat(3, 150px);
 }
 
 .squares {
-  border: 1px solid red;
+  border: 2px solid black;
+}
+
+#top-left {
+  border-style: none solid solid none;
+}
+
+#top-mid {
+  border-style: none solid solid solid;
+}
+
+#top-right {
+  border-style: none none solid solid;
+}
+
+#mid-left {
+  border-style: solid solid solid none;
+}
+
+#mid-right {
+  border-style: solid none solid solid;
+}
+
+#btm-left {
+  border-style: solid solid none none;
+}
+
+#btm-mid {
+  border-style: solid solid none solid;
+}
+
+#btm-right {
+  border-style: solid none none solid;
 }
