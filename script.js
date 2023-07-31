@@ -43,15 +43,42 @@ function appendBoard() {
 appendBoard();
 
 function checkForWinner() {
-  const rowWinner = function() {
+  function rowWinner() {
     for (let i = 0; i < board.length; i++) {
       const row = [];
       for (let j = 0; j < board[i].length; j++) {
         row.push(board[i][j]);
       };
-      let result = row.every((item) => item === 'X') || row.every((item) => item === 'O');
-      if (result) console.log(row[0] + ' WON!!!');
+      const result = row.every((item) => item === 'X') || row.every((item) => item === 'O');
+      if (result) return console.log(row);
     }
   }
-  rowWinner();
+  function columnWinner() {
+    for (let i = 0; i < board.length; i++) {
+      const column = [];
+      for (let j = 0; j < board[i].length; j++) {
+        column.push(board[j][i]);
+      };
+      const result = column.every((item) => item === 'X') || column.every((item) => item === 'O');
+      if (result) return console.log(column);
+    }
+  }
+  function checkDiagonals() {
+    const diagonalOne = [];
+    diagonalOne.push(board[0][0], board[1][1], board[2][2]);
+
+    const diagonalTwo = [];
+    diagonalTwo.push(board[0][2], board[1][1], board[2][0]);
+
+    const resultA = diagonalOne.every((item) => item === 'X') ||
+                    diagonalOne.every((item) => item === 'O');
+    const resultB = diagonalTwo.every((item) => item === 'X') ||
+                    diagonalTwo.every((item) => item === 'O');
+    if (resultA) {
+      console.log(diagonalOne);
+    } else if (resultB) {
+      console.log(diagonalTwo);
+    }
+  }
+  checkDiagonals()
 }
