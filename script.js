@@ -1,12 +1,27 @@
 const squares = document.querySelectorAll('.squares');
+const newGameButton = document.querySelector('.new-game-button');
 
 function playGame() {
-  const board = [
+  let board = [
     ['', '', ''],
     ['', '', ''],
     ['', '', '']
   ];
 
+  newGameButton.addEventListener('click', resetGame);
+  function resetGame() {
+    squares.forEach((square) => {
+      square.classList.remove('disabled');
+      square.textContent = '';
+    })
+    boardFiltered = null;
+    board = [
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ];
+  }
+  
   function appendBoard() {
     function computersChoice() {
       while (true) {
@@ -91,12 +106,14 @@ function playGame() {
   }
   appendBoard();
 
+  let boardFiltered = null;
   function disableBoard() {
-    const boardFiltered = [].concat(...board).filter((item) => item != '');
+    boardFiltered = [].concat(...board).filter((item) => item != '');
+    console.log(boardFiltered);
     if (checkForWinner() || boardFiltered.length === 9) {
       squares.forEach((square) => {
         square.classList.add('disabled');
-      })
+      });
     }
   }
 }
