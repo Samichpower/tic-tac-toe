@@ -11,7 +11,22 @@ h1 {
 
 .board-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bottom-content {
+  margin: 25px;
+}
+
+.new-game-button {
+  border: none;
+  background-color: white;
+  padding: 3px;
+}
+
+.new-game-button:hover {
+  background-color: whitesmoke;
 }
 
 
