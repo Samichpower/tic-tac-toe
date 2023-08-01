@@ -38,7 +38,7 @@ function playGame() {
             }
           }
         };
-        checkForWinner();
+        console.log(checkForWinner());
       });
     });
   };
@@ -85,15 +85,12 @@ function playGame() {
   
     if (rowWinner() || columnWinner() || diagonalWinner()) {
       const winner = rowWinner() || columnWinner() || diagonalWinner();
-      console.log(winner + ' won!');
-      return true;
+      return winner;
     } else {
       return false;
     }
   }
+  appendBoard();
 }
 
-
-
-appendBoard();
-
+playGame()
