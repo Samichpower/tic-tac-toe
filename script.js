@@ -40,7 +40,6 @@ function playGame() {
             };
           };
         };
-        // console.log(checkForWinner()); //This is where we do something with the winner.
         disableBoard();
       });
     });
@@ -95,7 +94,6 @@ function playGame() {
 
   function disableBoard() {
     const boardFiltered = [].concat(...board).filter((item) => item != '');
-    console.log(boardFiltered);
     if (checkForWinner() || boardFiltered.length === 9) {
       squares.forEach((square) => {
         square.classList.add('disabled');
