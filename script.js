@@ -18,7 +18,7 @@ function playGame() {
           board[row][column] = 'O';
           setTimeout(() => {
             boardSquare.textContent = 'O';
-          },250)
+          }, 250)
           break;
         }
       }
@@ -40,7 +40,7 @@ function playGame() {
             };
           };
         };
-        console.log(checkForWinner()); //This is where we do something with the winner.
+        // console.log(checkForWinner()); //This is where we do something with the winner.
         disableBoard();
       });
     });
@@ -89,14 +89,14 @@ function playGame() {
     if (rowWinner() || columnWinner() || diagonalWinner()) {
       const winner = rowWinner() || columnWinner() || diagonalWinner();
       return winner;
-    } else {
-      return false;
     }
   }
   appendBoard();
 
   function disableBoard() {
-    if (checkForWinner()) {
+    const boardFiltered = [].concat(...board).filter((item) => item != '');
+    console.log(boardFiltered);
+    if (checkForWinner() || boardFiltered.length === 9) {
       squares.forEach((square) => {
         square.classList.add('disabled');
       })
