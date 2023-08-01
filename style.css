@@ -31,6 +31,10 @@ h1 {
   justify-content: center;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 .squares:hover {
   background-color: whitesmoke;
 }

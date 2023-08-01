@@ -40,7 +40,8 @@ function playGame() {
             };
           };
         };
-        console.log(checkForWinner());
+        console.log(checkForWinner()); //This is where we do something with the winner.
+        disableBoard();
       });
     });
   };
@@ -93,6 +94,14 @@ function playGame() {
     }
   }
   appendBoard();
+
+  function disableBoard() {
+    if (checkForWinner()) {
+      squares.forEach((square) => {
+        square.classList.add('disabled');
+      })
+    }
+  }
 }
 
 playGame();
