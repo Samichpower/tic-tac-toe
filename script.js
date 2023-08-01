@@ -1,12 +1,12 @@
 const squares = document.querySelectorAll('.squares');
 
-const board = [
-  ['', '', ''],
-  ['', '', ''],
-  ['', '', '']
-]
-
 function playGame() {
+  const board = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ];
+
   function appendBoard() {
     function computersChoice() {
       while (true) {
@@ -16,7 +16,9 @@ function playGame() {
         const boardSquare = document.querySelector(`[data-index="${index}"]`);
         if (!board[row][column]) {
           board[row][column] = 'O';
-          boardSquare.textContent = 'O';
+          setTimeout(() => {
+            boardSquare.textContent = 'O';
+          },250)
           break;
         }
       }
@@ -33,10 +35,10 @@ function playGame() {
         if (!checkForWinner()) {
           for (let i = 0; i < squares.length; i++) {
             if (!squares[i].textContent) {
-              setTimeout(computersChoice, 250);
+              computersChoice();
               break;
-            }
-          }
+            };
+          };
         };
         console.log(checkForWinner());
       });
@@ -93,4 +95,4 @@ function playGame() {
   appendBoard();
 }
 
-playGame()
+playGame();
