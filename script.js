@@ -39,7 +39,6 @@ function appendBoard() {
       } else {
         // square.removeEventListener('click', displayWinner);
       }
-      console.log(checkForWinner());
     });
   });
 };
@@ -87,6 +86,8 @@ function checkForWinner() {
   }
 
   if (rowWinner() || columnWinner() || diagonalWinner()) {
+    const winner = rowWinner() || columnWinner() || diagonalWinner();
+    console.log(winner + ' won!');
     return true;
   } else {
     return false;
