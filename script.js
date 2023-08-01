@@ -28,13 +28,16 @@ function appendBoard() {
       const column = index % 3;
       board[row][column] = 'X';
       square.textContent = 'X';
-      for (let i = 0; i < squares.length; i++) {
-        if (!squares[i].textContent) {
-          computersChoice();
-          break;
+      //The for loop checks to see if the board is filled, or an infinite loop will kill the browser.
+      if (!checkForWinner()) {
+        for (let i = 0; i < squares.length; i++) {
+          if (!squares[i].textContent) {
+            computersChoice();
+            break;
+          }
         }
       }
-      checkForWinner();
+      console.log(checkForWinner())
       console.log(board);
     });
   });
@@ -50,7 +53,7 @@ function checkForWinner() {
         row.push(board[i][j]);
       };
       const result = row.every((item) => item === 'X') || row.every((item) => item === 'O');
-      if (result) return console.log(row);
+      if (result) return true;
     }
   }
   function columnWinner() {
@@ -60,13 +63,12 @@ function checkForWinner() {
         column.push(board[j][i]);
       };
       const result = column.every((item) => item === 'X') || column.every((item) => item === 'O');
-      if (result) return console.log(column);
+      if (result) return true;
     }
   }
-  function checkDiagonals() {
+  function diagonalWinner() {
     const diagonalOne = [];
     diagonalOne.push(board[0][0], board[1][1], board[2][2]);
-
     const diagonalTwo = [];
     diagonalTwo.push(board[0][2], board[1][1], board[2][0]);
 
@@ -74,11 +76,12 @@ function checkForWinner() {
                     diagonalOne.every((item) => item === 'O');
     const resultB = diagonalTwo.every((item) => item === 'X') ||
                     diagonalTwo.every((item) => item === 'O');
-    if (resultA) {
-      console.log(diagonalOne);
-    } else if (resultB) {
-      console.log(diagonalTwo);
-    }
+    if (resultA || resultB) return true;
   }
-  checkDiagonals()
+
+  if (rowWinner() || columnWinner() || diagonalWinner()) {
+    return true;
+  } else {
+    return false;
+  }
 }
