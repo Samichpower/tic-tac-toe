@@ -32,7 +32,7 @@ function appendBoard() {
       if (!checkForWinner()) {
         for (let i = 0; i < squares.length; i++) {
           if (!squares[i].textContent) {
-            computersChoice();
+            setTimeout(computersChoice, 250);
             break;
           }
         }
