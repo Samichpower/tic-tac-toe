@@ -17,6 +17,7 @@ function playGame() {
         if (!board[row][column]) {
           board[row][column] = 'O';
           setTimeout(() => {
+            boardSquare.classList.add('disabled');
             boardSquare.textContent = 'O';
           }, 250)
           break;
@@ -31,6 +32,7 @@ function playGame() {
         const column = index % 3;
         board[row][column] = 'X';
         square.textContent = 'X';
+        square.classList.add('disabled');
         //The for loop checks to see if the board is filled before the NPC plays, or an infinite loop will kill the page.
         if (!checkForWinner()) {
           for (let i = 0; i < squares.length; i++) {
