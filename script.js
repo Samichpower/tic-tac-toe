@@ -84,11 +84,8 @@ function playGame() {
         return diagonalTwo[0];
       }
     }
-  
-    if (rowWinner() || columnWinner() || diagonalWinner()) {
-      const winner = rowWinner() || columnWinner() || diagonalWinner();
-      return winner;
-    }
+    const winner = rowWinner() || columnWinner() || diagonalWinner();
+    return winner;
   }
   appendBoard();
 
