@@ -36,9 +36,10 @@ function appendBoard() {
             break;
           }
         }
+      } else {
+        // square.removeEventListener('click', displayWinner);
       }
-      console.log(checkForWinner())
-      console.log(board);
+      console.log(checkForWinner());
     });
   });
 };
@@ -52,8 +53,9 @@ function checkForWinner() {
       for (let j = 0; j < board[i].length; j++) {
         row.push(board[i][j]);
       };
+
       const result = row.every((item) => item === 'X') || row.every((item) => item === 'O');
-      if (result) return true;
+      if (result) return row[0];
     }
   }
   function columnWinner() {
@@ -62,8 +64,9 @@ function checkForWinner() {
       for (let j = 0; j < board[i].length; j++) {
         column.push(board[j][i]);
       };
+
       const result = column.every((item) => item === 'X') || column.every((item) => item === 'O');
-      if (result) return true;
+      if (result) return column[0];
     }
   }
   function diagonalWinner() {
@@ -76,7 +79,11 @@ function checkForWinner() {
                     diagonalOne.every((item) => item === 'O');
     const resultB = diagonalTwo.every((item) => item === 'X') ||
                     diagonalTwo.every((item) => item === 'O');
-    if (resultA || resultB) return true;
+    if (resultA) {
+      return diagonalOne[0];
+    } else if (resultB) {
+      return diagonalTwo[0];
+    }
   }
 
   if (rowWinner() || columnWinner() || diagonalWinner()) {
