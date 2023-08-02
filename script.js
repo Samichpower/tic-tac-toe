@@ -58,7 +58,6 @@ function playGame() {
         const boardSquare = document.querySelector(`[data-index="${index}"]`);
         if (!board[row][column]) {
           board[row][column] = 'O';
-          appendWinnerScore(checkForWinner);
           setTimeout(() => {
             boardSquare.classList.add('disabled');
             boardSquare.textContent = 'O';
