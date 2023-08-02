@@ -1,6 +1,4 @@
 const squares = document.querySelectorAll('.squares');
-const newGameButton = document.querySelector('.new-game-button');
-const nextRoundButton = document.querySelector('.next-round-button');
 
 function playGame() {
   let board = [
@@ -12,14 +10,22 @@ function playGame() {
   let playerScore = 0;
   let computerScore = 0;
   
+  const newGameButton = document.querySelector('.new-game-button');
   newGameButton.addEventListener('click', () => {
     clearBoard();
     playerScore = 0;
     computerScore = 0;
   });
   
+  const nextRoundButton = document.querySelector('.next-round-button');
   nextRoundButton.addEventListener('click', () => {
-    clearBoard();
+    let isRoundOver = false;
+    for (let i = 0; i < squares.length; i++) {
+      if (checkForWinner()) {
+        isRoundOver = true;
+        clearBoard();
+      };
+    };
   });
 
   function clearBoard() {
