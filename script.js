@@ -12,17 +12,15 @@ function playGame() {
   let playerScore = 0;
   let computerScore = 0;
   
-  newGameButton.addEventListener('click', resetGame);
-  function resetGame() {
+  newGameButton.addEventListener('click', () => {
     clearBoard();
     playerScore = 0;
     computerScore = 0;
-  }
+  });
   
-  nextRoundButton.addEventListener('click', nextRound);
-  function nextRound() {
+  nextRoundButton.addEventListener('click', () => {
     clearBoard();
-  }
+  });
 
   function clearBoard() {
     squares.forEach((square) => {
