@@ -1,5 +1,6 @@
 const squares = document.querySelectorAll('.squares');
 const newGameButton = document.querySelector('.new-game-button');
+const nextRoundButton = document.querySelector('.next-round-button');
 
 function playGame() {
   let board = [
@@ -8,8 +9,22 @@ function playGame() {
     ['', '', '']
   ];
 
+  let playerScore = 0;
+  let computerScore = 0;
+  
   newGameButton.addEventListener('click', resetGame);
   function resetGame() {
+    clearBoard();
+    playerScore = 0;
+    computerScore = 0;
+  }
+  
+  nextRoundButton.addEventListener('click', nextRound);
+  function nextRound() {
+    clearBoard();
+  }
+
+  function clearBoard() {
     squares.forEach((square) => {
       square.classList.remove('disabled');
       square.textContent = '';
@@ -22,7 +37,19 @@ function playGame() {
     ];
   }
   
-  function appendBoard() {
+  function playRound() {
+    function appendWinnerScore(winner) {
+      if (winner === 'X') {
+        playerScore++;
+        console.log('PLAYER SCORE: ' + playerScore);
+        console.log('COMPUTER SCORE: ' + computerScore);
+      } else if (winner === 'O') {
+        computerScore++;
+        console.log('PLAYER SCORE: ' + playerScore);
+        console.log('COMPUTER SCORE: ' + computerScore);
+      }
+    }
+
     function computersChoice() {
       while (true) {
         const index = Math.floor(Math.random() * 9);
@@ -31,6 +58,7 @@ function playGame() {
         const boardSquare = document.querySelector(`[data-index="${index}"]`);
         if (!board[row][column]) {
           board[row][column] = 'O';
+          appendWinnerScore(checkForWinner);
           setTimeout(() => {
             boardSquare.classList.add('disabled');
             boardSquare.textContent = 'O';
@@ -58,9 +86,11 @@ function playGame() {
           };
         };
         disableBoard();
+        appendWinnerScore(checkForWinner());
       });
     });
   };
+  playRound();
 
   function checkForWinner() {
     function rowWinner() {
@@ -101,15 +131,14 @@ function playGame() {
         return diagonalTwo[0];
       }
     }
+
     const winner = rowWinner() || columnWinner() || diagonalWinner();
     return winner;
   }
-  appendBoard();
 
   let boardFiltered = null;
   function disableBoard() {
     boardFiltered = [].concat(...board).filter((item) => item != '');
-    console.log(boardFiltered);
     if (checkForWinner() || boardFiltered.length === 9) {
       squares.forEach((square) => {
         square.classList.add('disabled');
