@@ -13,17 +13,14 @@ function playGame() {
   const newGameButton = document.querySelector('.new-game-button');
   newGameButton.addEventListener('click', () => {
     clearBoard();
+    nextRoundButton.disabled = false;
     playerScore = 0;
     computerScore = 0;
   });
   
   const nextRoundButton = document.querySelector('.next-round-button');
   nextRoundButton.addEventListener('click', () => {
-    let isRoundOver = false;
-      if (checkForWinner()) {
-        isRoundOver = true;
-        clearBoard();
-      };
+    clearBoard();
   });
 
   function clearBoard() {
@@ -77,15 +74,17 @@ function playGame() {
         board[row][column] = 'X';
         square.textContent = 'X';
         square.classList.add('disabled');
-        //The for loop checks to see if the board is filled before the NPC plays, or an infinite loop will kill the page.
         if (!checkForWinner()) {
+          nextRoundButton.disabled = true;
           for (let i = 0; i < squares.length; i++) {
             if (!squares[i].textContent) {
               computersChoice();
               break;
             };
           };
-        };
+        } else {
+          nextRoundButton.disabled = false;
+        }
         disableBoard();
         appendWinnerScore(checkForWinner());
       });
