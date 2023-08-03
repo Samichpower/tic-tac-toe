@@ -30,6 +30,7 @@ function playGame() {
     let temp = boardObj.player;
     boardObj.player = boardObj.computer;
     boardObj.computer = temp;
+    if (boardObj.computer === 'X') doComputersTurn();
   });
 
   function clearBoard() {
@@ -44,6 +45,23 @@ function playGame() {
       ['', '', '']
     ];
   }
+
+  function doComputersTurn() {
+    while (true) {
+      const index = Math.floor(Math.random() * 9);
+      const row = Math.floor(index / 3);
+      const column = index % 3;
+      const boardSquare = document.querySelector(`[data-index="${index}"]`);
+      if (!boardObj.board[row][column]) {
+        boardObj.board[row][column] = boardObj.computer;
+        setTimeout(() => {
+          boardSquare.textContent = boardObj.computer;
+          boardSquare.classList.add('disabled');
+        }, 250)
+        break;
+      }
+    }
+  }
   
   function playRound() {
     function appendWinnerScore(winner) {
@@ -53,23 +71,6 @@ function playGame() {
         playerScoreDisplay.textContent = ++playerScore;
       } else if (winner === boardObj.computer) {
         computerScoreDisplay.textContent = ++computerScore;
-      }
-    }
-
-    function doComputersTurn() {
-      while (true) {
-        const index = Math.floor(Math.random() * 9);
-        const row = Math.floor(index / 3);
-        const column = index % 3;
-        const boardSquare = document.querySelector(`[data-index="${index}"]`);
-        if (!boardObj.board[row][column]) {
-          boardObj.board[row][column] = boardObj.computer;
-          setTimeout(() => {
-            boardSquare.textContent = boardObj.computer;
-            boardSquare.classList.add('disabled');
-          }, 250)
-          break;
-        }
       }
     }
 
