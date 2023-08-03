@@ -7,7 +7,9 @@ function playGame() {
       ['', '', ''],
       ['', '', '']
     ],
-    winner: null, 
+    winner: null,
+    player: 'X',
+    computer: 'O'
   };
 
   let playerScore = 0;
@@ -25,6 +27,9 @@ function playGame() {
   nextRoundButton.addEventListener('click', () => {
     clearBoard();
     boardObj.winner = null;
+    let temp = boardObj.player;
+    boardObj.player = boardObj.computer;
+    boardObj.computer = temp;
   });
 
   function clearBoard() {
@@ -44,14 +49,10 @@ function playGame() {
     function appendWinnerScore(winner) {
       const playerScoreDisplay = document.querySelector('.player-score');
       const computerScoreDisplay = document.querySelector('.npc-score');
-      if (winner === 'X') {
+      if (winner === boardObj.player) {
         playerScoreDisplay.textContent = ++playerScore;
-        console.log('PLAYER SCORE: ' + playerScore);
-        console.log('COMPUTER SCORE: ' + computerScore);
-      } else if (winner === 'O') {
+      } else if (winner === boardObj.computer) {
         computerScoreDisplay.textContent = ++computerScore;
-        console.log('PLAYER SCORE: ' + playerScore);
-        console.log('COMPUTER SCORE: ' + computerScore);
       }
     }
 
@@ -62,9 +63,9 @@ function playGame() {
         const column = index % 3;
         const boardSquare = document.querySelector(`[data-index="${index}"]`);
         if (!boardObj.board[row][column]) {
-          boardObj.board[row][column] = 'O';
+          boardObj.board[row][column] = boardObj.computer;
           setTimeout(() => {
-            boardSquare.textContent = 'O';
+            boardSquare.textContent = boardObj.computer;
             boardSquare.classList.add('disabled');
           }, 250)
           break;
@@ -74,12 +75,13 @@ function playGame() {
 
     squares.forEach((square) => {
       square.addEventListener('click', (e) => {
+        console.log(boardObj);
         function doPlayersTurn() {
           const index = e.target.dataset.index;
           const row = Math.floor(index / 3);
           const column = index % 3;
-          boardObj.board[row][column] = 'X';
-          square.textContent = 'X';
+          boardObj.board[row][column] = boardObj.player;
+          square.textContent = boardObj.player;
           square.classList.add('disabled');
         };
         doPlayersTurn();
@@ -109,7 +111,6 @@ function playGame() {
         for (let j = 0; j < boardObj.board[i].length; j++) {
           row.push(boardObj.board[i][j]);
         };
-  
         const result = row.every((item) => item === 'X') || row.every((item) => item === 'O');
         if (result) return row[0];
       }
@@ -120,7 +121,6 @@ function playGame() {
         for (let j = 0; j < boardObj.board[i].length; j++) {
           column.push(boardObj.board[j][i]);
         };
-  
         const result = column.every((item) => item === 'X') || column.every((item) => item === 'O');
         if (result) return column[0];
       }
