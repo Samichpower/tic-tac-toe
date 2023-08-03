@@ -7,8 +7,11 @@
   <title>Tic-Tac-Toe</title>
 </head>
 <body>
-  <h1>Tic-Tac-Toe</h1>
+  <div class="score-container">
+    <p class="score-text">Your Score:<br><span class="player-score">0</span></p>
+  </div>
   <div class="container">
+    <h1>Tic-Tac-Toe</h1>
     <div class="squares-parent">
       <div class="squares" data-index="0" id="top-left"></div>
       <div class="squares" data-index="1" id="top-mid"></div>
@@ -24,6 +27,9 @@
       <button class="next-round-button">Next Round</button>
       <button class="new-game-button">New Game</button>
     </div>
+  </div>
+  <div class="score-container">
+    <p class="score-text">Opponent Score:<br><span class="npc-score">0</span></p>
   </div>
 
   <script src="script.js"></script>

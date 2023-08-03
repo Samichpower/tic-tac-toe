@@ -38,12 +38,14 @@ function playGame() {
   
   function playRound() {
     function appendWinnerScore(winner) {
+      const playerScoreDisplay = document.querySelector('.player-score');
+      const computerScoreDisplay = document.querySelector('.npc-score');
       if (winner === 'X') {
-        playerScore++;
+        playerScoreDisplay.textContent = ++playerScore;
         console.log('PLAYER SCORE: ' + playerScore);
         console.log('COMPUTER SCORE: ' + computerScore);
       } else if (winner === 'O') {
-        computerScore++;
+        computerScoreDisplay.textContent = ++computerScore;
         console.log('PLAYER SCORE: ' + playerScore);
         console.log('COMPUTER SCORE: ' + computerScore);
       }
