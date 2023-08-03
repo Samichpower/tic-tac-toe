@@ -51,7 +51,7 @@ function playGame() {
       }
     }
 
-    function getComputersChoice() {
+    function doComputersTurn() {
       while (true) {
         const index = Math.floor(Math.random() * 9);
         const row = Math.floor(index / 3);
@@ -60,27 +60,31 @@ function playGame() {
         if (!board[row][column]) {
           board[row][column] = 'O';
           setTimeout(() => {
-            boardSquare.classList.add('disabled');
             boardSquare.textContent = 'O';
+            boardSquare.classList.add('disabled');
           }, 250)
           break;
         }
       }
     }
-  
+
     squares.forEach((square) => {
       square.addEventListener('click', (e) => {
-        const index = e.target.dataset.index;
-        const row = Math.floor(index / 3);
-        const column = index % 3;
-        board[row][column] = 'X';
-        square.textContent = 'X';
-        square.classList.add('disabled');
+        function doPlayersTurn() {
+          const index = e.target.dataset.index;
+          const row = Math.floor(index / 3);
+          const column = index % 3;
+          board[row][column] = 'X';
+          square.textContent = 'X';
+          square.classList.add('disabled');
+        };
+        doPlayersTurn();
+
         if (!checkForWinner()) {
           nextRoundButton.disabled = true;
           for (let i = 0; i < squares.length; i++) {
             if (!squares[i].textContent) {
-              getComputersChoice();
+              doComputersTurn();
               break;
             };
           };
