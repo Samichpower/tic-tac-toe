@@ -51,7 +51,7 @@ function playGame() {
       }
     }
 
-    function computersChoice() {
+    function getComputersChoice() {
       while (true) {
         const index = Math.floor(Math.random() * 9);
         const row = Math.floor(index / 3);
@@ -80,7 +80,7 @@ function playGame() {
           nextRoundButton.disabled = true;
           for (let i = 0; i < squares.length; i++) {
             if (!squares[i].textContent) {
-              computersChoice();
+              getComputersChoice();
               break;
             };
           };
@@ -122,7 +122,6 @@ function playGame() {
       diagonalOne.push(board[0][0], board[1][1], board[2][2]);
       const diagonalTwo = [];
       diagonalTwo.push(board[0][2], board[1][1], board[2][0]);
-  
       const resultA = diagonalOne.every((item) => item === 'X') ||
                       diagonalOne.every((item) => item === 'O');
       const resultB = diagonalTwo.every((item) => item === 'X') ||
