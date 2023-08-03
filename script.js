@@ -20,12 +20,10 @@ function playGame() {
   const nextRoundButton = document.querySelector('.next-round-button');
   nextRoundButton.addEventListener('click', () => {
     let isRoundOver = false;
-    for (let i = 0; i < squares.length; i++) {
       if (checkForWinner()) {
         isRoundOver = true;
         clearBoard();
       };
-    };
   });
 
   function clearBoard() {
