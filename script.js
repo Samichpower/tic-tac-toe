@@ -20,7 +20,7 @@ function playGame() {
   const newGameButton = document.querySelector('.new-game-button');
   newGameButton.addEventListener('click', () => {
     clearBoard();
-    nextRoundButton.disabled = false;
+    nextRoundButton.disabled = true;
     boardObj.player = 'X';
     boardObj.computer = 'O';
     playerScore = 0;
@@ -30,8 +30,10 @@ function playGame() {
   });
   
   const nextRoundButton = document.querySelector('.next-round-button');
+  nextRoundButton.disabled = true;
   nextRoundButton.addEventListener('click', () => {
     console.log(boardObj);
+    nextRoundButton.disabled = true;
     clearBoard();
     boardObj.roundWinner = null;
     let temp = boardObj.player;
@@ -69,7 +71,6 @@ function playGame() {
         break;
       }
     }
-    if (checkForWinner()) nextRoundButton.disabled = false;
   }
   
   function playRound() {
@@ -95,16 +96,13 @@ function playGame() {
         doPlayersTurn();
 
         if (!checkForWinner()) {
-          nextRoundButton.disabled = true;
           for (let i = 0; i < squares.length; i++) {
             if (!squares[i].textContent) {
               doComputersTurn();
               break;
             };
           };
-        } else {
-          nextRoundButton.disabled = false;
-        }
+        } 
         disableBoard();
         appendWinnerScore(checkForWinner());
       });
@@ -162,6 +160,7 @@ function playGame() {
   function disableBoard() {
     boardFiltered = [].concat(...boardObj.board).filter((item) => item != '');
     if (checkForWinner() || boardFiltered.length === 9) {
+      nextRoundButton.disabled = false;
       squares.forEach((square) => {
         square.classList.add('disabled');
       });
