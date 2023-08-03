@@ -7,7 +7,7 @@ function playGame() {
       ['', '', ''],
       ['', '', '']
     ],
-    winner: null,
+    roundWinner: null,
     player: 'X',
     computer: 'O'
   };
@@ -31,8 +31,9 @@ function playGame() {
   
   const nextRoundButton = document.querySelector('.next-round-button');
   nextRoundButton.addEventListener('click', () => {
+    console.log(boardObj);
     clearBoard();
-    boardObj.winner = null;
+    boardObj.roundWinner = null;
     let temp = boardObj.player;
     boardObj.player = boardObj.computer;
     boardObj.computer = temp;
@@ -50,6 +51,7 @@ function playGame() {
       ['', '', ''],
       ['', '', '']
     ];
+    boardObj.roundWinner = null;
   }
 
   function doComputersTurn() {
@@ -67,6 +69,7 @@ function playGame() {
         break;
       }
     }
+    if (checkForWinner()) nextRoundButton.disabled = false;
   }
   
   function playRound() {
@@ -147,6 +150,11 @@ function playGame() {
     }
 
     const winner = rowWinner() || columnWinner() || diagonalWinner();
+    if (winner === boardObj.player) {
+      boardObj.roundWinner = 'Player';
+    } else if (winner === boardObj.computer) {
+      boardObj.roundWinner = 'Computer';
+    };
     return winner;
   }
 
