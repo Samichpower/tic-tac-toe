@@ -14,13 +14,19 @@ function playGame() {
 
   let playerScore = 0;
   let computerScore = 0;
+  const playerScoreDisplay = document.querySelector('.player-score');
+  const computerScoreDisplay = document.querySelector('.npc-score');
   
   const newGameButton = document.querySelector('.new-game-button');
   newGameButton.addEventListener('click', () => {
     clearBoard();
     nextRoundButton.disabled = false;
+    boardObj.player = 'X';
+    boardObj.computer = 'O';
     playerScore = 0;
     computerScore = 0;
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = playerScore;
   });
   
   const nextRoundButton = document.querySelector('.next-round-button');
@@ -65,8 +71,6 @@ function playGame() {
   
   function playRound() {
     function appendWinnerScore(winner) {
-      const playerScoreDisplay = document.querySelector('.player-score');
-      const computerScoreDisplay = document.querySelector('.npc-score');
       if (winner === boardObj.player) {
         playerScoreDisplay.textContent = ++playerScore;
       } else if (winner === boardObj.computer) {
