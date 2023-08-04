@@ -75,14 +75,6 @@ function playGame() {
   }
   
   function playRound() {
-    function appendWinnerScore(winner) {
-      if (winner === boardObj.player) {
-        playerScoreDisplay.textContent = ++playerScore;
-      } else if (winner === boardObj.computer) {
-        computerScoreDisplay.textContent = ++computerScore;
-      }
-    }
-
     squares.forEach((square) => {
       square.addEventListener('click', (e) => {
         console.log(boardObj);
@@ -105,7 +97,12 @@ function playGame() {
           };
         } 
         disableBoard();
-        appendWinnerScore(checkForWinner());
+        
+        if (checkForWinner() === boardObj.player) {
+          playerScoreDisplay.textContent = ++playerScore;
+        } else if (checkForWinner() === boardObj.computer) {
+          computerScoreDisplay.textContent = ++computerScore;
+        }
       });
     });
   };
