@@ -8,6 +8,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
 }
 
 h1 {
@@ -37,6 +38,11 @@ button {
 
 button:hover {
   background-color: whitesmoke;
+}
+
+.symbol {
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .score-text {

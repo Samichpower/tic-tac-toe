@@ -16,11 +16,12 @@ function playGame() {
   let computerScore = 0;
   const playerScoreDisplay = document.querySelector('.player-score');
   const computerScoreDisplay = document.querySelector('.npc-score');
+  const playerSymbol = document.querySelector('.player-char');
+  const computerSymbol = document.querySelector('.computer-char');
   
   const newGameButton = document.querySelector('.new-game-button');
   newGameButton.addEventListener('click', () => {
-    clearBoard();
-    nextRoundButton.disabled = true;
+    clearGame();
     boardObj.player = 'X';
     boardObj.computer = 'O';
     playerScore = 0;
@@ -32,17 +33,17 @@ function playGame() {
   const nextRoundButton = document.querySelector('.next-round-button');
   nextRoundButton.disabled = true;
   nextRoundButton.addEventListener('click', () => {
-    console.log(boardObj);
-    nextRoundButton.disabled = true;
-    clearBoard();
-    boardObj.roundWinner = null;
+    clearGame();
     let temp = boardObj.player;
     boardObj.player = boardObj.computer;
     boardObj.computer = temp;
+    playerSymbol.textContent = boardObj.player;
+    computerSymbol.textContent = boardObj.computer;
     if (boardObj.computer === 'X') doComputersTurn();
   });
 
-  function clearBoard() {
+  function clearGame() {
+    nextRoundButton.disabled = true;
     squares.forEach((square) => {
       square.classList.remove('disabled');
       square.textContent = '';
