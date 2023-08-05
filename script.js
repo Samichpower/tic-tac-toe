@@ -28,6 +28,8 @@ function playGame() {
     computerScore = 0;
     playerScoreDisplay.textContent = playerScore;
     computerScoreDisplay.textContent = playerScore;
+    playerSymbol.textContent = 'X';
+    computerSymbol.textContent = 'O';
   });
   
   const nextRoundButton = document.querySelector('.next-round-button');
@@ -63,6 +65,7 @@ function playGame() {
       const row = Math.floor(index / 3);
       const column = index % 3;
       const boardSquare = document.querySelector(`[data-index="${index}"]`);
+
       if (!boardObj.board[row][column]) {
         boardObj.board[row][column] = boardObj.computer;
         setTimeout(() => {
