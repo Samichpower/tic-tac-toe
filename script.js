@@ -8,7 +8,8 @@ const boardObj = {
   ],
   roundWinner: null,
   player: 'X',
-  computer: 'O'
+  computer: 'O',
+  difficulty: 'easy',
 };
 
 let playerScore = 0;
@@ -62,25 +63,27 @@ function doComputersTurn() {
   function getRandomMove() {
     while (true) {
       const index = Math.floor(Math.random() * 9);
-      const row = Math.floor(index / 3);
-      const column = index % 3;
       const boardSquare = document.querySelector(`[data-index="${index}"]`);
-
-      // if (!boardSquare.textContent) {
-      //   return index;
-      // }
-
-      if (!boardObj.board[row][column]) {
-        boardObj.board[row][column] = boardObj.computer;
-        setTimeout(() => {
-          boardSquare.textContent = boardObj.computer;
-          boardSquare.classList.add('disabled');
-        }, 250);
-        break;
+      if (!boardSquare.textContent) {
+        return index;
       }
     }
   }
-  getRandomMove();
+
+  let index;
+  if (boardObj.difficulty === 'Easy') {
+    index = getRandomMove();
+  }
+
+  const row = Math.floor(index / 3);
+  const column = index % 3;
+  const boardSquare = document.querySelector(`[data-index="${index}"]`);
+
+  boardObj.board[row][column] = boardObj.computer;
+  setTimeout(() => {
+    boardSquare.textContent = boardObj.computer;
+    boardSquare.classList.add('disabled');
+  }, 250);
 }
 
 function playRound() {
