@@ -70,7 +70,7 @@ function doComputersTurn() {
       setTimeout(() => {
         boardSquare.textContent = boardObj.computer;
         boardSquare.classList.add('disabled');
-      }, 250)
+      }, 250);
       break;
     }
   }
