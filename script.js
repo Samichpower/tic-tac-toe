@@ -73,7 +73,6 @@ function doComputersTurn() {
   function findWinningMove(board) {
     for (let row = 0; row < board.length; row++) {
       if (board[row].filter((item) => item === boardObj.computer).length === 2 && board[row].filter((item) => item === '').length === 1) {
-        console.log('WINNING MOVE');
         let item = board[row].indexOf('');
         index = row * 3 + item;
         squareIndex = document.querySelector(`[data-index="${index}"]`);
@@ -84,13 +83,43 @@ function doComputersTurn() {
     }
   }
 
+  function checkIfFirstMove(board) {
+    for (let row = 0; row < board.length; row++) {
+      for (let column = 0; column < board.length; column++) {
+        if (board[row][column] != '') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function placeOnCorner() {
+    let randNum = Math.floor(Math.random() * 9);
+    if (randNum === 0) {
+      index = 0;
+    } else if (randNum === 1) {
+      index = 2;
+    } else if (randNum === 2) {
+      index = 6;
+    } else if (randNum === 3) {
+      index = 8;
+    } else {
+      findWinningMove(boardObj.board);
+      console.log(randNum);
+    }
+    squareIndex = document.querySelector(`[data-index="${index}"]`);
+  }
+
   if (boardObj.difficulty === 'easy') {
     getRandomMove();
   } else if (boardObj.difficulty === 'normal') {
-    findWinningMove(boardObj.board);
+    if (checkIfFirstMove(boardObj.board)) {
+      placeOnCorner(boardObj.board);
+    } else {
+      findWinningMove(boardObj.board);
+    }
   }
-
-  console.log(squareIndex);
   const row = Math.floor(index / 3);
   const column = index % 3;
   boardObj.board[row][column] = boardObj.computer;
