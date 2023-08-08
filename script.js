@@ -60,9 +60,9 @@ function clearGame() {
 }
 
 function doComputersTurn() {
+  let index;
+  let squareIndex;
   function getRandomMove() {
-    let index;
-    let squareIndex;
     while (true) {
       index = Math.floor(Math.random() * 9);
       squareIndex = document.querySelector(`[data-index="${index}"]`);
@@ -78,16 +78,19 @@ function doComputersTurn() {
     }, 250);
   }
 
-  // function findWinningMove() {
-  //   for (let row of boardObj.board) {
-  //     row.filter((item) => item === boardObj.computer).length;
-  //   }
-  // }
-  // findWinningMove();
+  function findWinningMove() {
+    for (let row of boardObj.board) {
+      if (row.filter((item) => item === boardObj.computer).length === 2 && row.filter((item) => item === '').length === 1) {
+        console.log('Two AI choice in the same row');
+      }
+    }
+  }
 
   if (boardObj.difficulty === 'easy') {
     getRandomMove();
   }
+  
+  findWinningMove();
 }
 
 function playRound() {
