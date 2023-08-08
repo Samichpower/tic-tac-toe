@@ -68,22 +68,18 @@ function doComputersTurn() {
       squareIndex = document.querySelector(`[data-index="${index}"]`);
       if (!squareIndex.textContent) break;
     }
-    const row = Math.floor(index / 3);
-    const column = index % 3;
-    boardObj.board[row][column] = boardObj.computer;
-    setTimeout(() => {
-      squareIndex.textContent = boardObj.computer;
-      squareIndex.classList.add('disabled');
-    }, 250);
   }
 
-  function findWinningMove(board, symbol) {
+  function findWinningMove(board) {
     for (let row = 0; row < board.length; row++) {
       if (board[row].filter((item) => item === boardObj.computer).length === 2 && board[row].filter((item) => item === '').length === 1) {
+        console.log('WINNING MOVE');
         let item = board[row].indexOf('');
         index = row * 3 + item;
         squareIndex = document.querySelector(`[data-index="${index}"]`);
-        console.log(squareIndex);
+        break;
+      } else {
+        getRandomMove();
       }
     }
   }
@@ -91,9 +87,17 @@ function doComputersTurn() {
   if (boardObj.difficulty === 'easy') {
     getRandomMove();
   } else if (boardObj.difficulty === 'normal') {
-    findWinningMove(boardObj.board, boardObj.computer);
-    getRandomMove();
+    findWinningMove(boardObj.board);
   }
+
+  console.log(squareIndex);
+  const row = Math.floor(index / 3);
+  const column = index % 3;
+  boardObj.board[row][column] = boardObj.computer;
+  setTimeout(() => {
+    squareIndex.textContent = boardObj.computer;
+    squareIndex.classList.add('disabled');
+  }, 250);
 }
 
 function playRound() {
