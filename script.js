@@ -115,52 +115,49 @@ function doComputersTurn() {
       }
     }
 
+    function playDiagonals(diagonal, indexOne, indexTwo, indexThree) {
+      const item = diagonal.indexOf('');
+      switch (item) {
+        case 0:
+          index = indexOne;
+          break;
+        case 1:
+          index = indexTwo;
+          break;
+        case 2:
+          index = indexThree;
+          break;
+      }
+      squareIndex = document.querySelector(`[data-index="${index}"]`);
+      console.log(index);
+    }
+
     const diagonalOne = [];
     diagonalOne.push(boardObj.board[0][0], boardObj.board[1][1], boardObj.board[2][2]);
     if (
       diagonalOne.filter((item) => item === boardObj.computer).length === 2 && 
       diagonalOne.filter((item) => item === '').length === 1
     ) {
-      const item = diagonalOne.indexOf('');
-      switch (item) {
-        case 0:
-          index = 0;
-          break;
-        case 1:
-          index = 4;
-          break;
-        case 2:
-          index = 8;
-          break;
-      }
-      squareIndex = document.querySelector(`[data-index="${index}"]`);
+      playDiagonals(diagonalOne, 0, 4, 8);
     } else if (
       diagonalOne.filter((item) => item === boardObj.player).length === 2 && 
       diagonalOne.filter((item) => item === '').length === 1
     ) {
-      const item = diagonalOne.indexOf('');
-      switch (item) {
-        case 0:
-          index = 0;
-          break;
-        case 1:
-          index = 4;
-          break;
-        case 2:
-          index = 8;
-          break;
-      }
-      squareIndex = document.querySelector(`[data-index="${index}"]`);
+      playDiagonals(diagonalOne, 0, 4, 8);
     }
 
     const diagonalTwo = [];
     diagonalTwo.push(boardObj.board[0][2], boardObj.board[1][1], boardObj.board[2][0]);
-
     if (
       diagonalTwo.filter((item) => item === boardObj.computer).length === 2 && 
       diagonalTwo.filter((item) => item === '').length === 1
     ) {
-      console.log('Winning diagonal detected');
+      playDiagonals(diagonalTwo, 2, 4, 6);
+    } else if (
+      diagonalTwo.filter((item) => item === boardObj.player).length === 2 && 
+      diagonalTwo.filter((item) => item === '').length === 1
+    ) {
+      playDiagonals(diagonalTwo, 2, 4, 6);
     }
   }
 
