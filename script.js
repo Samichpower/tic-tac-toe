@@ -114,6 +114,54 @@ function doComputersTurn() {
         getRandomMove();
       }
     }
+
+    const diagonalOne = [];
+    diagonalOne.push(boardObj.board[0][0], boardObj.board[1][1], boardObj.board[2][2]);
+    if (
+      diagonalOne.filter((item) => item === boardObj.computer).length === 2 && 
+      diagonalOne.filter((item) => item === '').length === 1
+    ) {
+      const item = diagonalOne.indexOf('');
+      switch (item) {
+        case 0:
+          index = 0;
+          break;
+        case 1:
+          index = 4;
+          break;
+        case 2:
+          index = 8;
+          break;
+      }
+      squareIndex = document.querySelector(`[data-index="${index}"]`);
+    } else if (
+      diagonalOne.filter((item) => item === boardObj.player).length === 2 && 
+      diagonalOne.filter((item) => item === '').length === 1
+    ) {
+      const item = diagonalOne.indexOf('');
+      switch (item) {
+        case 0:
+          index = 0;
+          break;
+        case 1:
+          index = 4;
+          break;
+        case 2:
+          index = 8;
+          break;
+      }
+      squareIndex = document.querySelector(`[data-index="${index}"]`);
+    }
+
+    const diagonalTwo = [];
+    diagonalTwo.push(boardObj.board[0][2], boardObj.board[1][1], boardObj.board[2][0]);
+
+    if (
+      diagonalTwo.filter((item) => item === boardObj.computer).length === 2 && 
+      diagonalTwo.filter((item) => item === '').length === 1
+    ) {
+      console.log('Winning diagonal detected');
+    }
   }
 
   function checkIfFirstMove(board) {
