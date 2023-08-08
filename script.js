@@ -88,8 +88,6 @@ function doComputersTurn() {
         index = row * 3 + item;
         squareIndex = document.querySelector(`[data-index="${index}"]`);
         break;
-      } else {
-        getRandomMove();
       }
       
       const columnContainer = [];
@@ -104,6 +102,16 @@ function doComputersTurn() {
         index = item * 3 + row;
         squareIndex = document.querySelector(`[data-index="${index}"]`);
         break;
+      } else if (
+        columnContainer.filter((item) => item === boardObj.player).length === 2 && 
+        columnContainer.filter((item) => item === '').length === 1
+      ) {
+        let item = columnContainer.indexOf('');
+        index = item * 3 + row;
+        squareIndex = document.querySelector(`[data-index="${index}"]`);
+        break;
+      } else {
+        getRandomMove();
       }
     }
   }
