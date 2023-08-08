@@ -9,7 +9,7 @@ const boardObj = {
   roundWinner: null,
   player: 'X',
   computer: 'O',
-  difficulty: 'easy',
+  difficulty: 'normal',
 };
 
 let playerScore = 0;
@@ -68,7 +68,6 @@ function doComputersTurn() {
       squareIndex = document.querySelector(`[data-index="${index}"]`);
       if (!squareIndex.textContent) break;
     }
-    
     const row = Math.floor(index / 3);
     const column = index % 3;
     boardObj.board[row][column] = boardObj.computer;
@@ -78,19 +77,23 @@ function doComputersTurn() {
     }, 250);
   }
 
-  function findWinningMove() {
-    for (let row of boardObj.board) {
-      if (row.filter((item) => item === boardObj.computer).length === 2 && row.filter((item) => item === '').length === 1) {
-        console.log('Two AI choice in the same row');
+  function findWinningMove(board, symbol) {
+    for (let row = 0; row < board.length; row++) {
+      if (board[row].filter((item) => item === boardObj.computer).length === 2 && board[row].filter((item) => item === '').length === 1) {
+        let item = board[row].indexOf('');
+        index = row * 3 + item;
+        squareIndex = document.querySelector(`[data-index="${index}"]`);
+        console.log(squareIndex);
       }
     }
   }
 
   if (boardObj.difficulty === 'easy') {
     getRandomMove();
+  } else if (boardObj.difficulty === 'normal') {
+    findWinningMove(boardObj.board, boardObj.computer);
+    getRandomMove();
   }
-  
-  findWinningMove();
 }
 
 function playRound() {
