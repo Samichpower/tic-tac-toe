@@ -72,7 +72,18 @@ function doComputersTurn() {
 
   function findWinningMove(board) {
     for (let row = 0; row < board.length; row++) {
-      if (board[row].filter((item) => item === boardObj.computer).length === 2 && board[row].filter((item) => item === '').length === 1) {
+      if (
+        board[row].filter((item) => item === boardObj.computer).length === 2 && 
+        board[row].filter((item) => item === '').length === 1
+      ) {
+        let item = board[row].indexOf('');
+        index = row * 3 + item;
+        squareIndex = document.querySelector(`[data-index="${index}"]`);
+        break;
+      } else if (
+        board[row].filter((item) => item === boardObj.player).length === 2 && 
+        board[row].filter((item) => item === '').length === 1
+      ) {
         let item = board[row].indexOf('');
         index = row * 3 + item;
         squareIndex = document.querySelector(`[data-index="${index}"]`);
