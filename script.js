@@ -9,7 +9,8 @@ const boardObj = {
   roundWinner: null,
   player: 'X',
   computer: 'O',
-  difficulty: 'normal',
+  isNewGame: true,
+  difficulty: 'hard',
 };
 
 let playerScore = 0;
@@ -18,12 +19,33 @@ const playerScoreDisplay = document.querySelector('.player-score');
 const computerScoreDisplay = document.querySelector('.npc-score');
 const playerSymbol = document.querySelector('.player-char');
 const computerSymbol = document.querySelector('.computer-char');
+const easyMode = document.querySelector('#easy');
+const hardMode = document.querySelector('#hard');
+
+easyMode.addEventListener('click', () => {
+  boardObj.difficulty = 'easy';
+  console.log(boardObj);
+});
+
+hardMode.addEventListener('click', () => {
+  boardObj.difficulty = 'hard';
+  console.log(boardObj);
+})
+
+function changeDifficultyButtons() {
+  if (boardObj.isNewGame === false) {
+    hardMode.disabled = true;
+    easyMode.disabled = true;
+  }
+}
 
 const newGameButton = document.querySelector('.new-game-button');
 newGameButton.addEventListener('click', () => {
   clearGame();
   boardObj.player = 'X';
   boardObj.computer = 'O';
+  boardObj.isNewGame = true;
+  changeDifficultyButtons();
   playerScore = 0;
   computerScore = 0;
   playerScoreDisplay.textContent = playerScore;
@@ -190,7 +212,7 @@ function doComputersTurn() {
 
   if (boardObj.difficulty === 'easy') {
     getRandomMove();
-  } else if (boardObj.difficulty === 'normal') {
+  } else if (boardObj.difficulty === 'hard') {
     if (checkIfFirstMove(boardObj.board)) {
       placeOnCorner(boardObj.board);
     } else {
@@ -209,6 +231,8 @@ function doComputersTurn() {
 function playRound() {
   squares.forEach((square) => {
     square.addEventListener('click', (e) => {
+      boardObj.isNewGame = false;
+      alterDifficultyButtons();
       function doPlayersTurn() {
         const index = e.target.dataset.index;
         const row = Math.floor(index / 3);
