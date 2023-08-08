@@ -61,29 +61,33 @@ function clearGame() {
 
 function doComputersTurn() {
   function getRandomMove() {
+    let index;
+    let squareIndex;
     while (true) {
-      const index = Math.floor(Math.random() * 9);
-      const boardSquare = document.querySelector(`[data-index="${index}"]`);
-      if (!boardSquare.textContent) {
-        return index;
-      }
+      index = Math.floor(Math.random() * 9);
+      squareIndex = document.querySelector(`[data-index="${index}"]`);
+      if (!squareIndex.textContent) break;
     }
+    
+    const row = Math.floor(index / 3);
+    const column = index % 3;
+    boardObj.board[row][column] = boardObj.computer;
+    setTimeout(() => {
+      squareIndex.textContent = boardObj.computer;
+      squareIndex.classList.add('disabled');
+    }, 250);
   }
 
-  let index;
-  if (boardObj.difficulty === 'Easy') {
-    index = getRandomMove();
+  // function findWinningMove() {
+  //   for (let row of boardObj.board) {
+  //     row.filter((item) => item === boardObj.computer).length;
+  //   }
+  // }
+  // findWinningMove();
+
+  if (boardObj.difficulty === 'easy') {
+    getRandomMove();
   }
-
-  const row = Math.floor(index / 3);
-  const column = index % 3;
-  const boardSquare = document.querySelector(`[data-index="${index}"]`);
-
-  boardObj.board[row][column] = boardObj.computer;
-  setTimeout(() => {
-    boardSquare.textContent = boardObj.computer;
-    boardSquare.classList.add('disabled');
-  }, 250);
 }
 
 function playRound() {
