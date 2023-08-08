@@ -91,6 +91,20 @@ function doComputersTurn() {
       } else {
         getRandomMove();
       }
+      
+      const columnContainer = [];
+      for (let column = 0; column < board.length; column++) {
+        columnContainer.push(board[column][row]);
+      }
+      if (
+        columnContainer.filter((item) => item === boardObj.computer).length === 2 && 
+        columnContainer.filter((item) => item === '').length === 1
+      ) {
+        let item = columnContainer.indexOf('');
+        index = item * 3 + row;
+        squareIndex = document.querySelector(`[data-index="${index}"]`);
+        break;
+      }
     }
   }
 
@@ -117,7 +131,6 @@ function doComputersTurn() {
       index = 8;
     } else {
       findWinningMove(boardObj.board);
-      console.log(randNum);
     }
     squareIndex = document.querySelector(`[data-index="${index}"]`);
   }
