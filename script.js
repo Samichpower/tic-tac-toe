@@ -25,14 +25,12 @@ const hardButton = document.querySelector('#hard');
 easyButton.addEventListener('click', () => {
   boardObj.difficulty = 'easy';
   changeDifficultyButtons();
-  console.log(boardObj);
 });
 
 hardButton.disabled = true;
 hardButton.addEventListener('click', () => {
   boardObj.difficulty = 'hard';
   changeDifficultyButtons();
-  console.log(boardObj);
 })
 
 function changeDifficultyButtons() {
@@ -163,7 +161,6 @@ function doComputersTurn() {
           break;
       }
       squareIndex = document.querySelector(`[data-index="${index}"]`);
-      console.log(index);
     }
 
     const diagonalOne = [];
