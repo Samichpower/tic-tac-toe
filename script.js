@@ -9,8 +9,8 @@ const boardObj = {
   roundWinner: null,
   player: 'X',
   computer: 'O',
-  isNewGame: true,
   difficulty: 'hard',
+  isNewGame: true,
 };
 
 let playerScore = 0;
@@ -19,23 +19,34 @@ const playerScoreDisplay = document.querySelector('.player-score');
 const computerScoreDisplay = document.querySelector('.npc-score');
 const playerSymbol = document.querySelector('.player-char');
 const computerSymbol = document.querySelector('.computer-char');
-const easyMode = document.querySelector('#easy');
-const hardMode = document.querySelector('#hard');
+const easyButton = document.querySelector('#easy');
+const hardButton = document.querySelector('#hard');
 
-easyMode.addEventListener('click', () => {
+easyButton.addEventListener('click', () => {
   boardObj.difficulty = 'easy';
+  changeDifficultyButtons();
   console.log(boardObj);
 });
 
-hardMode.addEventListener('click', () => {
+hardButton.disabled = true;
+hardButton.addEventListener('click', () => {
   boardObj.difficulty = 'hard';
+  changeDifficultyButtons();
   console.log(boardObj);
 })
 
 function changeDifficultyButtons() {
+  if (boardObj.difficulty === 'easy') {
+    easyButton.disabled = true;
+    hardButton.disabled = false;
+  } else if (boardObj.difficulty === 'hard') {
+    easyButton.disabled = false;
+    hardButton.disabled = true;
+  }
+
   if (boardObj.isNewGame === false) {
-    hardMode.disabled = true;
-    easyMode.disabled = true;
+    easyButton.disabled = true;
+    hardButton.disabled = true;
   }
 }
 
@@ -44,6 +55,7 @@ newGameButton.addEventListener('click', () => {
   clearGame();
   boardObj.player = 'X';
   boardObj.computer = 'O';
+  boardObj.difficulty = 'hard';
   boardObj.isNewGame = true;
   changeDifficultyButtons();
   playerScore = 0;
@@ -232,7 +244,7 @@ function playRound() {
   squares.forEach((square) => {
     square.addEventListener('click', (e) => {
       boardObj.isNewGame = false;
-      alterDifficultyButtons();
+      changeDifficultyButtons();
       function doPlayersTurn() {
         const index = e.target.dataset.index;
         const row = Math.floor(index / 3);
